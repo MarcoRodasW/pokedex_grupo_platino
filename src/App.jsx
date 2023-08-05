@@ -6,7 +6,6 @@ function App() {
   return (
     <main className="container mx-auto w-screen h-screen">
       <Header />
-      <FilterSection />
       <Pokemons />
     </main>
   )
