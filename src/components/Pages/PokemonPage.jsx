@@ -1,20 +1,41 @@
-import React from 'react'
 import Header from '../Header'
 import usePokemon from '../../Hooks/usePokemon'
-
+import PokemonEvolutions from '../PokemonSection/PokemonEvolutions'
+import { Link } from 'wouter'
 export default function PokemonPage({ id }) {
   const { pokemonsData, loading } = usePokemon(id)
   if (loading) {
     return <span className="loading loading-dots loading-xs"></span>
   }
+  const { id: pokemonID, name, sprites, abilities, base_experience, stats, types, species } = pokemonsData
 
-  const { id: pokemonID, name, sprites, abilities, base_experience, stats, types } = pokemonsData
-  console.log(abilities)
   return (
     <>
       <Header />
-      <section className="">
-        <div className="container p-10 mx-auto">
+      <section className="flex flex-col items-center justify-center">
+        <Link href="/">
+          <button className="btn btn-dark">
+            <div className="flex items-center gap-2 ">
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8v10a1 1 0 0 0 1 1h4v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5h4a1 1 0 0 0 1-1V8M1 10l9-9 9 9"
+                />
+              </svg>
+              <span className="mx-1">Home</span>
+            </div>
+          </button>
+        </Link>
+        <div className="container mx-auto ">
           <div className="flex items-center justify-center gap-4">
             <img
               src={sprites.other['official-artwork']['front_default']}
@@ -56,6 +77,10 @@ export default function PokemonPage({ id }) {
             </div>
           </div>
         </div>
+      </section>
+      <section className="m-5 flex flex-col justify-center items-center gap-4">
+        <h3>Evolutions</h3>
+        <PokemonEvolutions pokemonId={pokemonID} />
       </section>
     </>
   )
