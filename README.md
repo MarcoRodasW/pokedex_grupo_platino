@@ -1,6 +1,7 @@
 # Pokedex
 
 Ejercicio de prueba para Grupo Platino.
+Link del Proyecto [POKEDEX](https://pokedex-grupo-platino.vercel.app/)
 
 - API: [Pokemon API](https://pokeapi.co/)
 - FrameWork: React
@@ -9,7 +10,7 @@ Ejercicio de prueba para Grupo Platino.
 
 ## Instrucciones de Instalacion
 
-Este projecto usa el gestor de dependecias [PNPM](https://pnpm.io/)
+Este Proyecto usa el gestor de dependecias [PNPM](https://pnpm.io/)
 Una vez instalado pnpm solo utilice los siguientes comandos:
 
     cd "Carpeta del Projecto"
