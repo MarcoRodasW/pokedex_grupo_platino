@@ -7,6 +7,14 @@ Ejercicio de prueba para Grupo Platino.
 - FrameWorkCSS: TailwindCSS
 - Librerias Externas usadas: Wouter, DaysiUI
 
+## Instrucciones de Instalacion
+
+Este projecto usa el gestor de dependecias [PNPM](https://pnpm.io/)
+Una vez instalado pnpm solo utilice los siguientes comandos:
+
+    cd "Carpeta del Projecto"
+    pnpm install && pnpm run dev
+
 ## Funcionalidades
 
 - [ ] Responsive
