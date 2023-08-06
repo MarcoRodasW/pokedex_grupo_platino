@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react'
-import PokemonCard from './PokemonCard'
-import Pagination from './Pagination'
-import { API_ALLPOKEMONS, API_GETPOKEMON } from '../../Endpoints/Endpoints'
-import { FilterSection } from '../FilterSection/FilterSection'
-import SearchInput from '../FilterSection/SearchInput'
+import { useEffect, useState } from 'react'
+import { API_ALLPOKEMONS } from '../../Endpoints/Endpoints'
 import { Categories } from '../FilterSection/Categories'
+import SearchInput from '../FilterSection/SearchInput'
+import Pagination from './Pagination'
+import PokemonCard from './PokemonCard'
 
 export const Pokemons = () => {
   const [pokemons, setPokemons] = useState([])
@@ -20,7 +19,7 @@ export const Pokemons = () => {
 
       // Filter Pokemons based on the search query
       const filteredPokemons = data.results.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()),
+        pokemon.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
 
       setPokemons(filteredPokemons)

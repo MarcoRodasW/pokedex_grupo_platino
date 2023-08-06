@@ -1,6 +1,5 @@
-import React from 'react'
-import usePokemonData from '../../Hooks/usePokemonData'
 import { Link } from 'wouter'
+import usePokemonData from '../../Hooks/usePokemonData'
 function PokemonCard({ pokemonUrl }) {
   const { pokemonsData, loading } = usePokemonData(pokemonUrl)
 
@@ -15,7 +14,7 @@ function PokemonCard({ pokemonUrl }) {
       <Link href={`/pokemon/${name}`}>
         <a className="cursor-pointer">
           <figure>
-            <img src={sprites['front_default']} alt={name} className="object-contain w-40 h-40" />
+            <img src={sprites.front_default} alt={name} className="object-contain w-40 h-40" />
           </figure>
           <div className="card-body">
             <h2 className="card-title capitalize">{name}</h2>
