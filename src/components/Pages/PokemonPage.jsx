@@ -1,13 +1,16 @@
-import Header from '../Header'
 import usePokemon from '../../Hooks/usePokemon'
+import Header from '../Header'
 import PokemonEvolutions from '../PokemonSection/PokemonEvolutions'
-import { Link } from 'wouter'
+
+import { Link, useRoute } from 'wouter'
 export default function PokemonPage({ id }) {
-  const { pokemonsData, loading } = usePokemon(id)
+  const [match, params] = useRoute('/pokemon/:id')
+  const isMatch = match && id ? id : params.id
+  const { pokemonsData, loading } = usePokemon(isMatch)
   if (loading) {
     return <span className="loading loading-dots loading-xs"></span>
   }
-  const { id: pokemonID, name, sprites, abilities, base_experience, stats, types, species } = pokemonsData
+  const { id: pokemonID, name, sprites, abilities, base_experience, stats, types } = pokemonsData
 
   return (
     <>
@@ -17,7 +20,7 @@ export default function PokemonPage({ id }) {
           <button className="btn btn-dark">
             <div className="flex items-center gap-2 ">
               <svg
-                class="w-6 h-6 text-gray-800 dark:text-white"
+                className="w-6 h-6 text-gray-800 dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -25,9 +28,9 @@ export default function PokemonPage({ id }) {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M3 8v10a1 1 0 0 0 1 1h4v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5h4a1 1 0 0 0 1-1V8M1 10l9-9 9 9"
                 />
               </svg>
@@ -38,7 +41,7 @@ export default function PokemonPage({ id }) {
         <div className="container mx-auto ">
           <div className="flex items-center justify-center gap-4">
             <img
-              src={sprites.other['official-artwork']['front_default']}
+              src={sprites.other['official-artwork'].front_default}
               alt={name}
               className="object-contain w-80 h-80"
             />
@@ -56,21 +59,21 @@ export default function PokemonPage({ id }) {
               <div className="text-lg capitalize flex gap-4 items-center">
                 abilities:
                 {abilities.map(({ ability: { name } }, index) => (
-                  <div class="badge badge-outline capitalize" key={index}>
+                  <div className="badge badge-outline capitalize" key={index}>
                     {name}
                   </div>
                 ))}
               </div>
               <div className="flex gap-2 items-center">
                 Base Experience: {base_experience}
-                <progress class="progress w-56" value={base_experience} max="100"></progress>
+                <progress className="progress w-56" value={base_experience} max="100"></progress>
               </div>
               <div className="flex flex-col mt-4">
                 <div className="text-lg font-semibold capitalize">stats</div>
                 {stats.map(({ base_stat, stat: { name } }, index) => (
                   <div className="flex gap-2 items-center capitalize" key={index}>
                     {name} {base_stat}
-                    <progress class="progress w-56" value={base_stat} max="100"></progress>
+                    <progress className="progress w-56" value={base_stat} max="100"></progress>
                   </div>
                 ))}
               </div>
