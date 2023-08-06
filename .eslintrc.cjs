@@ -8,6 +8,9 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    'eslint-disable-next-line space-before-function-paren': false,
-  },
+    'eslint-disable-next-line ': 0,
+    'space-before-function-paren': 0,
+    'react/prop-types': 0,
+    camelcase: 0
+  }
 }
