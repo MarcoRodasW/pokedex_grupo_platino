@@ -16,7 +16,7 @@ export const Categories = () => {
   }, [])
 
   return (
-    <div className="flex flex-row w-full gap-4 items-center justify-center">
+    <div className=" my-5 flex flex-row w-full gap-4 items-center justify-center">
       <div className="">Search for Categories:</div>
       <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-4">
         {types.map((type, index) => (

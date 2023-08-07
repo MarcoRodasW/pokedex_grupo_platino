@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react'
 import { API_ALLPOKEMONS } from '../../Endpoints/Endpoints'
-import { Categories } from '../FilterSection/Categories'
+// import { Categories } from '../FilterSection/Categories'
 import SearchInput from '../FilterSection/SearchInput'
 import Pagination from './Pagination'
 import PokemonCard from './PokemonCard'
-
 export const Pokemons = () => {
   const [pokemons, setPokemons] = useState([])
   const [nextUrl, setNextUrl] = useState(null)
   const [prevUrl, setPrevUrl] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
-  console.log(searchQuery)
 
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(API_ALLPOKEMONS)
       const data = await res.json()
 
-      // Filter Pokemons based on the search query
       const filteredPokemons = data.results.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
@@ -49,9 +46,9 @@ export const Pokemons = () => {
   return (
     <>
       <SearchInput onSearch={setSearchQuery} />
-      <Categories />
+      {/* <Categories /> */}
       <section className="m-10">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-center gap-4 p-2">
           {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.name} pokemonUrl={pokemon.url} />
           ))}
