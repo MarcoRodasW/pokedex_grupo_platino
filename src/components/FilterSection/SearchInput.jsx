@@ -1,4 +1,4 @@
-import { useState } from 'react' // Don't forget to import React
+import { useState } from 'react'
 
 const SearchInput = ({ onSearch }) => {
   const [inputValue, setInputValue] = useState('')
@@ -13,16 +13,12 @@ const SearchInput = ({ onSearch }) => {
   }
 
   return (
-    <div className="flex justify-center mb-5">
-      <form
-        action=""
-        className="flex flex-row justify-evenly items-center space-x-5 w-full max-w-lg"
-        onSubmit={handleSubmit}
-      >
+    <div className="flex justify-center">
+      <form action="" className="flex flex-row items-center w-1/2 justify-center gap-4" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Search Pokemon"
-          className="input input-bordered w-full max-w-lg"
+          className="input input-bordered lg:w-1/2 sm:w-1/2 md:w-1/3"
           value={inputValue}
           onChange={handleChange}
         />
