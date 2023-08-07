@@ -1,8 +1,10 @@
+import { Link, useRoute } from 'wouter'
 import usePokemon from '../../Hooks/usePokemon'
 import Header from '../Header'
 import PokemonEvolutions from '../PokemonSection/PokemonEvolutions'
+import PokemonHeader from '../PokemonSection/PokemonHeader'
+import PokemonStats from '../PokemonSection/PokemonStats'
 
-import { Link, useRoute } from 'wouter'
 export default function PokemonPage({ id }) {
   const [match, params] = useRoute('/pokemon/:id')
   const isMatch = match && id ? id : params.id
@@ -39,7 +41,7 @@ export default function PokemonPage({ id }) {
           </button>
         </Link>
         <div className="container mx-auto ">
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex flex-col items-center justify-center gap-4 md:flex-row lg:flex-row">
             <img
               src={sprites.other['official-artwork'].front_default}
               alt={name}
@@ -47,43 +49,26 @@ export default function PokemonPage({ id }) {
             />
 
             <div className="mt-8">
-              <h1 className="text-2xl capitalize font-boldtext-white lg:text-3xl lg:w-96">{name}</h1>
-              <p className="text-xl font-semibold">Pokedex Number #{pokemonID}</p>
-              <div className="text-lg capitalize flex gap-4 items-center">
-                {types.map(({ type: { name } }, slot) => (
-                  <button className="btn btn-neutral no-animation" key={slot}>
-                    {name}
-                  </button>
-                ))}
-              </div>
-              <div className="text-lg capitalize flex gap-4 items-center">
-                abilities:
-                {abilities.map(({ ability: { name } }, index) => (
-                  <div className="badge badge-outline capitalize" key={index}>
-                    {name}
-                  </div>
-                ))}
-              </div>
-              <div className="flex gap-2 items-center">
-                Base Experience: {base_experience}
-                <progress className="progress w-56" value={base_experience} max="100"></progress>
-              </div>
+              <PokemonHeader
+                abilities={abilities}
+                name={name}
+                base_experience={base_experience}
+                pokemonID={pokemonID}
+                types={types}
+              />
               <div className="flex flex-col mt-4">
                 <div className="text-lg font-semibold capitalize">stats</div>
-                {stats.map(({ base_stat, stat: { name } }, index) => (
-                  <div className="flex gap-2 items-center capitalize" key={index}>
-                    {name} {base_stat}
-                    <progress className="progress w-56" value={base_stat} max="100"></progress>
-                  </div>
-                ))}
+                <PokemonStats stats={stats} />
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section className="m-5 flex flex-col justify-center items-center gap-4">
-        <h3>Evolutions</h3>
-        <PokemonEvolutions pokemonId={pokemonID} />
+      <section className="m-5 p-4">
+        <h2 className="text-2xl font-semibold text-center">Evolutions</h2>
+        <div className="flex lg:flex-row sm:flex-col md:flex-col items-center justify-center mt-2 gap-4">
+          <PokemonEvolutions pokemonId={pokemonID} />
+        </div>
       </section>
     </>
   )
