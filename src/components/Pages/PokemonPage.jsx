@@ -1,8 +1,12 @@
+import { Tab } from '@headlessui/react'
+import { Fragment } from 'react'
 import { Link, useRoute } from 'wouter'
 import usePokemon from '../../Hooks/usePokemon'
 import Header from '../Header'
+import PokemonEncounters from '../PokemonSection/PokemonEncounters'
 import PokemonEvolutions from '../PokemonSection/PokemonEvolutions'
 import PokemonHeader from '../PokemonSection/PokemonHeader'
+import PokemonMoves from '../PokemonSection/PokemonMoves'
 import PokemonStats from '../PokemonSection/PokemonStats'
 
 export default function PokemonPage({ id }) {
@@ -12,7 +16,17 @@ export default function PokemonPage({ id }) {
   if (loading) {
     return <span className="loading loading-dots loading-xs"></span>
   }
-  const { id: pokemonID, name, sprites, abilities, base_experience, stats, types } = pokemonsData
+  const {
+    id: pokemonID,
+    name,
+    sprites,
+    abilities,
+    base_experience,
+    stats,
+    types,
+    moves,
+    location_area_encounters
+  } = pokemonsData
 
   return (
     <>
@@ -49,24 +63,57 @@ export default function PokemonPage({ id }) {
             />
 
             <div className="mt-8">
-              <PokemonHeader
-                abilities={abilities}
-                name={name}
-                base_experience={base_experience}
-                pokemonID={pokemonID}
-                types={types}
-              />
-              <div className="flex flex-col mt-4">
-                <div className="text-lg font-semibold capitalize">stats</div>
-                <PokemonStats stats={stats} />
-              </div>
+              <Tab.Group defaultIndex={0}>
+                <Tab.List as="div" className="flex space-x-1 mb-5 rounded-xl p-1 items-center justify-center">
+                  <Tab as={Fragment}>
+                    {({ selected }) => (
+                      <button className={selected ? 'btn btn-dark btn-active' : 'btn btn-dark'}>Stats</button>
+                    )}
+                  </Tab>
+                  <Tab as={Fragment}>
+                    {({ selected }) => (
+                      <button className={selected ? 'btn btn-dark btn-active' : 'btn btn-dark'}>Encounters</button>
+                    )}
+                  </Tab>
+                  <Tab as={Fragment}>
+                    {({ selected }) => (
+                      <button className={selected ? 'btn btn-dark btn-active' : 'btn btn-dark'}>Moves</button>
+                    )}
+                  </Tab>
+                </Tab.List>
+                <Tab.Panels>
+                  <Tab.Panel>
+                    <PokemonHeader
+                      abilities={abilities}
+                      name={name}
+                      base_experience={base_experience}
+                      pokemonID={pokemonID}
+                      types={types}
+                    />
+                    <div className="flex flex-col mt-4">
+                      <div className="text-lg font-semibold capitalize">stats</div>
+                      <PokemonStats stats={stats} />
+                    </div>
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <div className="grid grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-2 gap-4 items-center justify-center">
+                      <PokemonEncounters encounterUrl={location_area_encounters} />
+                    </div>
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <div className="grid grid-cols-2 grid-rows-2 gap-3 items-center justify-center">
+                      <PokemonMoves moves={moves.slice(0, 5)} />
+                    </div>
+                  </Tab.Panel>
+                </Tab.Panels>
+              </Tab.Group>
             </div>
           </div>
         </div>
       </section>
       <section className="m-5 p-4">
         <h2 className="text-2xl font-semibold text-center">Evolutions</h2>
-        <div className="flex lg:flex-row sm:flex-col md:flex-col items-center justify-center mt-2 gap-4">
+        <div className="flex lg:flex-row flex-col items-center justify-center mt-2 gap-4">
           <PokemonEvolutions pokemonId={pokemonID} />
         </div>
       </section>
